@@ -23,6 +23,13 @@ fi
 
 mkdir -p ${OUTDIR} || { echo "Could not create directory ${OUTDIR}"; exit 1; }
 
+# Install cross-compiler if not present
+if ! command -v ${CROSS_COMPILE}gcc &> /dev/null; then
+    echo "Installing cross-compiler..."
+    sudo apt-get update
+    sudo apt-get install -y gcc-aarch64-linux-gnu
+fi
+
 cd "$OUTDIR"
 if [ ! -d "${OUTDIR}/linux-stable" ]; then
     echo "CLONING GIT LINUX STABLE VERSION ${KERNEL_VERSION} IN ${OUTDIR}"
