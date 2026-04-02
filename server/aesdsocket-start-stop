@@ -3,6 +3,7 @@
 case "$1" in
     start)
         echo "Starting aesdsocket"
+        rm -f /var/tmp/aesdsocketdata
         start-stop-daemon -S -n aesdsocket -a /usr/bin/aesdsocket -- -d
         ;;
     stop)
